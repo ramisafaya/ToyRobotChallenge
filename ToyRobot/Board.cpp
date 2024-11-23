@@ -1,15 +1,11 @@
 #include "Board.h"
 #include <iostream>
-bool Board::isWithinBounds(Location& loc)
-{
-	return true;
-}
 
-bool Board::canPlace(Location& l)
+bool Board::canPlace(Location& loc)
 {
 	bool can = false;
 
-	if (isWithinBounds(l))
+	if (isWithinBounds(loc))
 		can = true;
 
 	return can;

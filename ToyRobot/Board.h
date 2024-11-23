@@ -6,9 +6,9 @@
 class Board
 {
 	protected:
-		virtual bool isWithinBounds(Location& loc);
+		virtual bool isWithinBounds(Location& loc) = 0;
 
 	public:
-		virtual bool canPlace(Location& l);
+		virtual bool canPlace(Location& loc);
 };
 
