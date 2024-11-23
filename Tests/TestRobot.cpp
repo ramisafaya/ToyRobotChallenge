@@ -14,6 +14,19 @@ namespace TestRobot
 	{
 	public:
 
+		TEST_METHOD(TestMovedWhenNotPlaced)
+		{
+			Robot r;
+			Assert::AreEqual(false, r.move());
+			Assert::AreEqual(false, r.isPlaced());
+		}
+
+		TEST_METHOD(TestRotatedWhenNotPlaced)
+		{
+			Robot r;
+			Assert::AreEqual(false, r.rotateLeft());
+			Assert::AreEqual(false, r.isPlaced());
+		}
 		TEST_METHOD(TestPlaceRobot)
 		{
 			Robot r;
@@ -26,6 +39,14 @@ namespace TestRobot
 			Location robotLocation = r.getLocation();
 			Assert::AreEqual(0, robotLocation.getXcoordinate());
 			Assert::AreEqual(1, robotLocation.getYcoordinate());
+		}
+
+		TEST_METHOD(TestPlaceOutofBounds)
+		{
+			Robot r;
+			std::shared_ptr<TableTop> table(new TableTop(1, 2));
+			bool placed = r.place(table, Location(2, 1), Direction(Direction::Facing::north));
+			Assert::AreEqual(placed, false);
 		}
 
 		TEST_METHOD(TestRotateLeft)
