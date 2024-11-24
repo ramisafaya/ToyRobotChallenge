@@ -1,5 +1,6 @@
 #include "StreamEntityController.h"
 #include <string>
+#include <algorithm>
 #include "MoveCommand.h"
 #include "LeftCommand.h"
 #include "RightCommand.h"
@@ -94,6 +95,9 @@ std::shared_ptr<Command> StreamEntityController::nextCommand()
 	{
 		std::string line;
 		std::getline(*mStream, line);
+		//convert all text to upper case
+		std::transform(line.begin(), line.end(), line.begin(), toupper);
+
 		// ignore the command (return nullptr) if any of the text is unexpected
 		// if we get what we expect, we process, even if there are extra characters on the line
 		if (line.find(COMMAND_STRING_MOVE) != std::string::npos)

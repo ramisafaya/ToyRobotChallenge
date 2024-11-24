@@ -183,6 +183,23 @@ namespace TestStreamEntityController
 			Assert::AreEqual(std::string(""), actual->str());
 		}
 
+		TEST_METHOD(TestLowercase)
+		{
+			std::shared_ptr<Robot> r(new Robot());
+			std::shared_ptr<TableTop> table(new TableTop(5, 5));
+			std::shared_ptr<std::stringstream> actual(new std::stringstream());
+			std::shared_ptr<StreamEntityReporter> reporter(new StreamEntityReporter(r, actual));
+			std::shared_ptr<std::istringstream> input(new std::istringstream("place 1,1,North\n"));
+			std::unique_ptr<StreamEntityController> controller(new StreamEntityController(r, reporter, table, input));
+			std::shared_ptr<Command> cmd = controller->nextCommand();
+			if (cmd != nullptr)
+			{
+				cmd->action();
+				reporter->report();
+			}
+			Assert::AreEqual(std::string("1,1,NORTH\n"), actual->str());
+		}
+
 		/*
 		 * PLACE 0,0,NORTH
 		 * MOVE
