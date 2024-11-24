@@ -2,7 +2,6 @@
 
 Entity::Entity()
 {
-    mPlaced = false;
     mBoard = nullptr;
 }
 
@@ -34,7 +33,7 @@ void Entity::setLocation(Location& loc)
 
 bool Entity::isPlaced() const
 {
-    return mPlaced;
+    return (mBoard != nullptr);
 }
 
 bool Entity::place(std::shared_ptr<Board> board, Location& loc, Direction& dir)
@@ -42,7 +41,6 @@ bool Entity::place(std::shared_ptr<Board> board, Location& loc, Direction& dir)
     bool placed = false;
     if (board != nullptr && board->canPlace(loc))
     {
-        mPlaced = true;
         mBoard = board;
         mLocation = loc;
         mDirection = dir;

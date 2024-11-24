@@ -10,7 +10,6 @@ class Entity
 	std::shared_ptr<Board> mBoard;
 	Direction mDirection;
 	Location mLocation;
-	bool mPlaced;
 
 	protected:
 		void setDirection(Direction& dir);

@@ -30,10 +30,10 @@ std::shared_ptr<Location> StreamEntityController::getLocationFromPlaceLine(std::
 	int x = 0;
 	int y = 0;
 
-	int startX = line.find(COMMAND_STRING_PLACE) + 5;
-	int endX = line.find_first_of(',', startX);
+	int startX = (int) line.find(COMMAND_STRING_PLACE) + 5;
+	int endX = (int) line.find_first_of(',', startX);
 	int startY = endX + 1;
-	int endY = line.find_first_of(',', endX+1);
+	int endY = (int) line.find_first_of(',', endX+1);
 	if (startX != std::string::npos && endX != std::string::npos && startY != std::string::npos && endY != std::string::npos)
 	{
 		try
@@ -44,10 +44,12 @@ std::shared_ptr<Location> StreamEntityController::getLocationFromPlaceLine(std::
 		}
 		catch (const std::invalid_argument& e)
 		{
+			(void)e;  //ignoring exception itself so doing this to remove compiler warning
 			loc = nullptr;
 		}
 		catch (const std::out_of_range& e)
 		{
+			(void)e;  //ignoring exception itself so doing this to remove compiler warning
 			loc = nullptr;
 		}
 	}
@@ -60,7 +62,7 @@ std::shared_ptr<Direction> StreamEntityController::getDirectionFromPlaceLine(std
 	// line is expected to be PLACE X,Y,F
 	std::shared_ptr<Direction> dir = nullptr;
 
-	int lastComma = line.find_last_of(',');
+	int lastComma = (int) line.find_last_of(',');
 	if (lastComma != std::string::npos)
 	{
 		std::string dirStr = line.substr(lastComma + 1);
