@@ -85,7 +85,7 @@ Output: 3,3,NORTH
 	- From the Workloads section, select `Desktop development with C++` and then click `Install`.
 	- I am using Windows 11 Home.
 	- NOTE: on first startup, you may be asked to log in.
-2. Double click the **ToyRobotChallenge.sln** solution file to open it in Visual Studio Community 2022.
+2. Double click the `ToyRobotChallenge.sln` solution file to open it in Visual Studio Community 2022.
 3. Build the solution:  `Build->Build Solution or Ctrl+Shift+B`.
 
 **How to run console**
