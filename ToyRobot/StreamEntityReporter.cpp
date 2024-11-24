@@ -1,5 +1,10 @@
 #include "StreamEntityReporter.h"
 
+const std::string StreamEntityReporter::REPORT_STRING_NORTH = "NORTH";
+const std::string StreamEntityReporter::REPORT_STRING_SOUTH = "SOUTH";
+const std::string StreamEntityReporter::REPORT_STRING_EAST = "EAST";
+const std::string StreamEntityReporter::REPORT_STRING_WEST = "WEST";
+
 StreamEntityReporter::StreamEntityReporter(std::shared_ptr<Entity> entity, std::shared_ptr<std::ostream> stream)
 	: EntityReporter(entity)
 {
@@ -22,16 +27,16 @@ bool StreamEntityReporter::report()
 		switch (dir.getDirection())
 		{
 			case Direction::Facing::north:
-				dirString = "NORTH";
+				dirString = REPORT_STRING_NORTH;
 				break;
 			case Direction::Facing::south:
-				dirString = "SOUTH";
+				dirString = REPORT_STRING_SOUTH;
 				break;
 			case Direction::Facing::east:
-				dirString = "EAST";
+				dirString = REPORT_STRING_EAST;
 				break;
 			case Direction::Facing::west:
-				dirString = "WEST";
+				dirString = REPORT_STRING_WEST;
 				break;
 			default:
 				valid = false;

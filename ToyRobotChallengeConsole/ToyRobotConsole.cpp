@@ -1,18 +1,44 @@
-
 #include <iostream>
+#include "Windows.h"
+#include "../ToyRobot/Robot.h"
+#include "../ToyRobot/TableTop.h"
+#include "../ToyRobot/StreamEntityReporter.h"
+#include "../ToyRobot/StreamEntityController.h"
+
+static const int TABLE_WIDTH = 5;
+static const int TABLE_HEIGHT = 5;
+
+BOOL WINAPI CtrlHandler(DWORD fdwCtrlType)
+{
+	if (fdwCtrlType == CTRL_C_EVENT)
+	{
+		exit(0);
+	}
+
+	return FALSE;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	if (!SetConsoleCtrlHandler(CtrlHandler, TRUE))
+	{
+		std::cout << "ERROR: unable to register Control C handler, exiting." << std::endl;
+		return 1;
+	}
+
+	std::shared_ptr<Robot> robot(new Robot());
+	std::shared_ptr<TableTop> table(new TableTop(TABLE_WIDTH, TABLE_HEIGHT));
+	std::shared_ptr<std::ostream> output(&std::cout);
+	std::shared_ptr<std::istream> input(&std::cin);
+	std::shared_ptr<StreamEntityReporter> reporter(new StreamEntityReporter(robot, output));
+	std::unique_ptr<StreamEntityController> controller(new StreamEntityController(robot, reporter, table, input));
+
+	while (true)
+	{
+		std::shared_ptr<Command> cmd = controller->nextCommand();
+		if (cmd != nullptr)
+			cmd->action();
+	}
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

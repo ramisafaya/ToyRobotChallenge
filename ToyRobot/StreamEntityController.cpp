@@ -6,6 +6,17 @@
 #include "PlaceCommand.h"
 #include "ReportCommand.h"
 
+const std::string StreamEntityController::COMMAND_STRING_PLACE = "PLACE";
+const std::string StreamEntityController::COMMAND_STRING_MOVE = "MOVE";
+const std::string StreamEntityController::COMMAND_STRING_LEFT = "LEFT";
+const std::string StreamEntityController::COMMAND_STRING_RIGHT = "RIGHT";
+const std::string StreamEntityController::COMMAND_STRING_REPORT = "REPORT";
+
+const std::string StreamEntityController::COMMAND_STRING_NORTH = "NORTH";
+const std::string StreamEntityController::COMMAND_STRING_SOUTH = "SOUTH";
+const std::string StreamEntityController::COMMAND_STRING_EAST = "EAST";
+const std::string StreamEntityController::COMMAND_STRING_WEST = "WEST";
+
 StreamEntityController::StreamEntityController(std::shared_ptr<Entity> entity, std::shared_ptr<EntityReporter> reporter, std::shared_ptr<Board> board, std::shared_ptr<std::istream> stream)
 	: EntityController(entity, reporter, board)
 {
@@ -19,7 +30,7 @@ std::shared_ptr<Location> StreamEntityController::getLocationFromPlaceLine(std::
 	int x = 0;
 	int y = 0;
 
-	int startX = line.find("PLACE") + 5;
+	int startX = line.find(COMMAND_STRING_PLACE) + 5;
 	int endX = line.find_first_of(',', startX);
 	int startY = endX + 1;
 	int endY = line.find_first_of(',', endX+1);
@@ -54,19 +65,19 @@ std::shared_ptr<Direction> StreamEntityController::getDirectionFromPlaceLine(std
 	{
 		std::string dirStr = line.substr(lastComma + 1);
 		
-		if (dirStr.find("NORTH") != std::string::npos)
+		if (dirStr.find(COMMAND_STRING_NORTH) != std::string::npos)
 		{
 			dir = std::shared_ptr<Direction>(new Direction(Direction::Facing::north));
 		}
-		else if (dirStr.find("SOUTH") != std::string::npos)
+		else if (dirStr.find(COMMAND_STRING_SOUTH) != std::string::npos)
 		{
 			dir = std::shared_ptr<Direction>(new Direction(Direction::Facing::south));
 		}
-		else if (dirStr.find("EAST") != std::string::npos)
+		else if (dirStr.find(COMMAND_STRING_EAST) != std::string::npos)
 		{
 			dir = std::shared_ptr<Direction>(new Direction(Direction::Facing::east));
 		}
-		else if (dirStr.find("WEST") != std::string::npos)
+		else if (dirStr.find(COMMAND_STRING_WEST) != std::string::npos)
 		{
 			dir = std::shared_ptr<Direction>(new Direction(Direction::Facing::west));
 		}
@@ -83,26 +94,26 @@ std::shared_ptr<Command> StreamEntityController::nextCommand()
 		std::getline(*mStream, line);
 		// ignore the command (return nullptr) if any of the text is unexpected
 		// if we get what we expect, we process, even if there are extra characters on the line
-		if (line.find("MOVE") != std::string::npos)
+		if (line.find(COMMAND_STRING_MOVE) != std::string::npos)
 		{
 			cmd = std::shared_ptr<MoveCommand>(new MoveCommand(getEntity()));
 		}
-		else if (line.find("LEFT") != std::string::npos)
+		else if (line.find(COMMAND_STRING_LEFT) != std::string::npos)
 		{
 			cmd = std::shared_ptr<LeftCommand>(new LeftCommand(getEntity()));
 		}
-		else if (line.find("RIGHT") != std::string::npos)
+		else if (line.find(COMMAND_STRING_RIGHT) != std::string::npos)
 		{
 			cmd = std::shared_ptr<RightCommand>(new RightCommand(getEntity()));
 		}
-		else if (line.find("PLACE") != std::string::npos)
+		else if (line.find(COMMAND_STRING_PLACE) != std::string::npos)
 		{
 			std::shared_ptr<Location> location = getLocationFromPlaceLine(line);
 			std::shared_ptr<Direction> direction = getDirectionFromPlaceLine(line);
 			if (location != nullptr && direction != nullptr)
 				cmd = std::shared_ptr<PlaceCommand>(new PlaceCommand(getEntity(), getBoard(), *location, *direction));
 		}
-		else if (line.find("REPORT") != std::string::npos)
+		else if (line.find(COMMAND_STRING_REPORT) != std::string::npos)
 		{
 			cmd = std::shared_ptr<ReportCommand>(new ReportCommand(getEntity(), getReporter()));
 		}
