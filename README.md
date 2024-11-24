@@ -94,7 +94,11 @@ Output: 3,3,NORTH
 3. When completed, press `Ctrl+C`.
 4. Press any key to close the console window.
 
+![Sample console output](ConsoleExample.png "Sample console output")
+
 **How to run tests**
 1. Within the opened solution, open test explorer `Test->Test Explorer (Ctrl+E,T)`.
-2. Press the green play button, `Run All Tests In View`.
+2. Within test explorer, click the first green play button, `Run All Tests In View (Ctrl+R,V)`.
 3. View the test report.
+
+![Sample test report](TestResultsExample.png "Sample test report")
