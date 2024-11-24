@@ -14,6 +14,7 @@ bool Robot::move()
 		int x = loc.getXcoordinate();
 		int y = loc.getYcoordinate();
 
+		bool valid = true;
 		switch (dir.getDirection())
 		{
 			case Direction::Facing::east:
@@ -28,10 +29,13 @@ bool Robot::move()
 			case Direction::Facing::west:
 				x--;
 				break;
+			default:
+				valid = false;
+				break;
 		}
 
 		Location newLoc(x, y);
-		if (board != nullptr && board->canPlace(newLoc))
+		if (valid && board != nullptr && board->canPlace(newLoc))
 		{
 			setLocation(newLoc);
 			moved = true;
