@@ -81,7 +81,7 @@ Output: 3,3,NORTH
 **How to build**
 1. Install Visual Studio Community 2022 for Windows.
 	- Download Visual Studio Community 2022 installer from [here](https://visualstudio.microsoft.com/downloads/).
-	- Execute VisualStudioSetup.exe and continue until you are presented with a selection of workloads.
+	- Execute `VisualStudioSetup.exe` and continue until you are presented with a selection of workloads.
 	- From the Workloads section, select `Desktop development with C++` and then click `Install`.
 	- I am using Windows 11 Home.
 	- NOTE: on first startup, you may be asked to log in.
