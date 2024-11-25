@@ -91,8 +91,7 @@ Output: 3,3,NORTH
 **How to run console**
 1. Within the opened solution, start without debugging: `Debug->Start Without Debugging (Ctrl+F5)`.
 2. Interact with the console by typing commands (one per line).
-3. When completed, press `Ctrl+C`.
-4. Press any key to close the console window.
+3. When completed, close the console window.
 
 ![Sample console output](ConsoleExample.png "Sample console output")
 
