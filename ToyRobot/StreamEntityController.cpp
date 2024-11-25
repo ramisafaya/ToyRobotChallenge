@@ -31,7 +31,7 @@ std::shared_ptr<Location> StreamEntityController::getLocationFromPlaceLine(std::
 	int x = 0;
 	int y = 0;
 
-	int startX = (int) line.find(COMMAND_STRING_PLACE) + 5;
+	int startX = (int) line.find(COMMAND_STRING_PLACE) + (int) COMMAND_STRING_PLACE.size();
 	int endX = (int) line.find_first_of(',', startX);
 	int startY = endX + 1;
 	int endY = (int) line.find_first_of(',', endX+1);
