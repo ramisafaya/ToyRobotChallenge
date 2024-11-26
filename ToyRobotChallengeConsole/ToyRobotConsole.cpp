@@ -30,8 +30,8 @@ int main()
 
 	std::shared_ptr<Robot> robot(new Robot());
 	std::shared_ptr<TableTop> table(new TableTop(TABLE_WIDTH, TABLE_HEIGHT));
-	std::shared_ptr<std::ostream> output(&std::cout);
-	std::shared_ptr<std::istream> input(&std::cin);
+	std::shared_ptr<std::ostream> output(&std::cout, [](std::ostream*) {});
+	std::shared_ptr<std::istream> input(&std::cin, [](std::istream*) {});
 	std::shared_ptr<StreamEntityReporter> reporter(new StreamEntityReporter(robot, output));
 	std::unique_ptr<StreamEntityController> controller(new StreamEntityController(robot, reporter, table, input));
 
