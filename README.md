@@ -101,3 +101,6 @@ Output: 3,3,NORTH
 3. View the test report.
 
 ![Sample test report](TestResultsExample.png "Sample test report")
+
+**Sample output**
+Additional sample input and output is available at [Sample1.txt](Sample1.txt) and [Sample2.txt](Sample2.txt).

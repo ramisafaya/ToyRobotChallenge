@@ -1,0 +1,20 @@
+Input
+=====
+report
+move
+left
+place 1,1,north
+move
+report
+left
+left
+report
+move
+report
+
+Output
+======
+1,2,NORTH
+1,2,SOUTH
+1,1,SOUTH
+
