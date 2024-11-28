@@ -35,7 +35,7 @@ int main()
 	std::shared_ptr<StreamEntityReporter> reporter(new StreamEntityReporter(robot, output));
 	std::unique_ptr<StreamEntityController> controller(new StreamEntityController(robot, reporter, table, input));
 
-	while (true)
+	while (!std::cin.eof())
 	{
 		std::shared_ptr<Command> cmd = controller->nextCommand();
 		if (cmd != nullptr)
